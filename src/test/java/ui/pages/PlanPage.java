@@ -42,8 +42,9 @@ public class PlanPage {
     @FindBy(xpath = "//*[contains(text(),'Cover amount')]/parent::div/following-sibling::div[1]/span")
     private WebElement getCoverAmount;
 
-    @FindBy(xpath = "//*[contains(@class,'Slider-root')]")
-    private WebElement Slider;
+    @FindBy(xpath = "//*[contains(text(),'Pricing might change')]/following-sibling::form[1]//*[contains(text(),'Calculate Premium')]")
+    private WebElement CalculatePremium;
+
 
     public void enterSelfAge(String age){
         wait.until(ExpectedConditions.elementToBeClickable(SelfAge));
@@ -88,7 +89,10 @@ public class PlanPage {
         decreaseCoverAmount.click();
     }
 
-
+    public void calculatePremium(){
+        wait.until(ExpectedConditions.elementToBeClickable(CalculatePremium));
+        CalculatePremium.click();
+    }
 
 
 }

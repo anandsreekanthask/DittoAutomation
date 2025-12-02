@@ -17,6 +17,8 @@
         <cucumber.java.version>7.32.0</cucumber.java.version>
         <cucumber.pico.container.version>7.32.0</cucumber.pico.container.version>
         <cucumber.testng.version>7.32.0</cucumber.testng.version>
+        <extentreport.version>5.1.2</extentreport.version>
+        <extentreport.cucumber.version>1.14.0</extentreport.cucumber.version>
     </properties>
 
     <dependencies>
@@ -56,6 +58,19 @@
             <version>${cucumber.testng.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extentreport.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>${extentreport.cucumber.version}</version>
+        </dependency>
 
     </dependencies>
 
