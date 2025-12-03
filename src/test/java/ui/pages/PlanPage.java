@@ -1,6 +1,8 @@
 package ui.pages;
 
 import managers.DriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -13,6 +15,7 @@ import java.time.Duration;
 public class PlanPage {
 
     WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30));
+    private static final Logger logger = LogManager.getLogger(PlanPage.class);
 
     public PlanPage(){
         PageFactory.initElements(DriverManager.getDriver(),this);
@@ -75,7 +78,7 @@ public class PlanPage {
         NumberFormatter nf = new NumberFormatter();
         wait.until(ExpectedConditions.elementToBeClickable(getCoverAmount));
         String recommendedCover = nf.getCleansedCover(getCoverAmount.getText());
-        System.out.println("Captured Recommended cover : "+recommendedCover);
+        logger.info("Captured Recommended cover : "+recommendedCover);
         return recommendedCover;
     }
 

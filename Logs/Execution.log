@@ -1,0 +1,22 @@
+2025-12-03 19:22:41 INFO  UIDefinition:39 - Launching URL : https://app.joinditto.in/fq
+2025-12-03 19:22:44 INFO  UIDefinition:47 - Selecting plan : Optima Secure
+2025-12-03 19:22:51 INFO  UIDefinition:65 - Selecting self gender as Male and spouse gender as Female
+2025-12-03 19:22:53 INFO  UIDefinition:73 - Adding 1 son(s) and 1 daughters
+2025-12-03 19:22:55 INFO  UIDefinition:82 - Passing self age as 45
+2025-12-03 19:22:55 INFO  UIDefinition:84 - Passing spouse age as 40
+2025-12-03 19:22:56 INFO  UIDefinition:86 - Passing son age as 18
+2025-12-03 19:22:56 INFO  UIDefinition:88 - Passing daughter age as 10
+2025-12-03 19:22:56 INFO  UIDefinition:90 - Passing pincode age as 560067
+2025-12-03 19:22:58 INFO  UIDefinition:98 - Captured expected cover : 1
+2025-12-03 19:22:58 INFO  PlanPage:81 - Captured Recommended cover : 20
+2025-12-03 19:22:58 INFO  PlanPage:81 - Captured Recommended cover : 25
+2025-12-03 19:22:58 INFO  PlanPage:81 - Captured Recommended cover : 50
+2025-12-03 19:22:58 INFO  PlanPage:81 - Captured Recommended cover : 1
+2025-12-03 19:22:58 INFO  PlanPage:81 - Captured Recommended cover : 1
+2025-12-03 19:23:16 INFO  UIDefinition:154 - Captured amount for Base Premium : ₹47,851.50
+2025-12-03 19:23:16 INFO  UIDefinition:159 - Captured amount for Unlimited Restoration = ₹239.26
+2025-12-03 19:23:16 INFO  UIDefinition:159 - Captured amount for Optima Wellbeing = ₹1,899.05
+2025-12-03 19:23:16 INFO  UIDefinition:159 - Captured amount for ABCD = ₹11,962.88
+2025-12-03 19:23:16 INFO  UIDefinition:163 - Captured amount for Total Premium : ₹61,952.69
+2025-12-03 19:23:16 INFO  UIDefinition:164 - Final Actual Sum : 61952.69
+2025-12-03 19:23:16 INFO  UIDefinition:165 - Final Calculated Sum : 61952.69

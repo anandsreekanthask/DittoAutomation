@@ -6,6 +6,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import managers.DriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import ui.pages.*;
 import utils.ConfigReader;
@@ -24,6 +26,8 @@ public class UIDefinition {
     private PremiumPage premiumPage;
     private NumberFormatter numberFormatter;
 
+    private static final Logger logger = LogManager.getLogger(UIDefinition.class);
+
     public UIDefinition(ConfigReader configReader) {
 
         this.configReader = configReader;
@@ -32,6 +36,7 @@ public class UIDefinition {
     @Given("I launch the application")
     public void iLaunchTheApplication() {
         String url = configReader.getBaseURL();
+        logger.info("Launching URL : "+url);
         DriverManager.getDriver().get(url);
     }
 
@@ -39,6 +44,7 @@ public class UIDefinition {
     @And("I select {string}")
     public void iSelect(String plan) {
         landingPage = new LandingPage();
+        logger.info("Selecting plan : "+plan);
         landingPage.identifyPlan(plan);
     }
 
@@ -56,6 +62,7 @@ public class UIDefinition {
     @And("I fill {string} and {string}")
     public void iFillSelfAndSpouse(String selfGender, String spouseGender)  {
         membersPage = new MembersPage();
+        logger.info("Selecting self gender as "+selfGender+" and spouse gender as "+spouseGender);
         membersPage.identifySelfGender(selfGender);
         membersPage.identifySpouseGender(spouseGender);
     }
@@ -63,6 +70,7 @@ public class UIDefinition {
     @And("I add {int} son\\(s) and {int} daughter\\(s) and proceed to Plan page")
     public void iAddSonSAndDaughterSAndProceedToPlanPage(int sons, int daughters) {
         membersPage = new MembersPage();
+        logger.info("Adding "+sons+" son(s) and "+daughters+" daughters");
         membersPage.addSons(sons);
         membersPage.addDaughters(daughters);
         membersPage.clickNext();
@@ -71,10 +79,15 @@ public class UIDefinition {
     @And("I enter {string}, {string}, {string}, {string} and {string}")
     public void iEnterAnd(String selfAge, String spouseAge, String sonAge, String daughterAge, String pinCode) {
         planPage = new PlanPage();
+        logger.info("Passing self age as "+selfAge);
         planPage.enterSelfAge(selfAge);
+        logger.info("Passing spouse age as "+spouseAge);
         planPage.enterSpouseAge(spouseAge);
+        logger.info("Passing son age as "+sonAge);
         planPage.enterSonAge(sonAge);
+        logger.info("Passing daughter age as "+daughterAge);
         planPage.enterDaughterAge(daughterAge);
+        logger.info("Passing pincode age as "+pinCode);
         planPage.enterProposerPincode(pinCode);
     }
 
@@ -82,7 +95,7 @@ public class UIDefinition {
     public void iSelectLAsTheCoverAmount(String coverAmount) throws InterruptedException{
         int recommendedCoverAmount,expectedCoverAmount;
         expectedCoverAmount = Integer.parseInt(coverAmount.replaceAll("[^0-9]", ""));
-        System.out.println("Captured expected cover : "+expectedCoverAmount);
+        logger.info("Captured expected cover : "+expectedCoverAmount);
         planPage = new PlanPage();
         if(coverAmount.contains("Cr")){
             do{
@@ -138,18 +151,18 @@ public class UIDefinition {
         float sum = Float.parseFloat(numberFormatter.getCleansedPremium(premiumPage.getBasePremium()));
         List<Map<String,String>> data = table.asMaps(String.class,String.class);
         Map<String,String> riderMap = data.getFirst();
-        System.out.println("Captured amount for Base Premium : "+premiumPage.getBasePremium());
+        logger.info("Captured amount for Base Premium : "+premiumPage.getBasePremium());
         for(Map.Entry<String,String> entry : riderMap.entrySet()){
             String riderName = entry.getKey();
             boolean isSelected = Boolean.parseBoolean(entry.getValue());
             if(isSelected){
-                System.out.println("Captured amount for "+riderName+" = "+premiumPage.getRiderPremium(riderName));
+                logger.info("Captured amount for "+riderName+" = "+premiumPage.getRiderPremium(riderName));
                 sum += Float.parseFloat(numberFormatter.getCleansedPremium(premiumPage.getRiderPremium(riderName)));
             }
         }
-        System.out.println("Captured amount for Total Premium : "+premiumPage.getTotalPremium());
-        System.out.println("Final Actual Sum : "+numberFormatter.getCleansedPremium(premiumPage.getTotalPremium()));
-        System.out.println("Final Calculated Sum : "+sum);
+        logger.info("Captured amount for Total Premium : "+premiumPage.getTotalPremium());
+        logger.info("Final Actual Sum : "+numberFormatter.getCleansedPremium(premiumPage.getTotalPremium()));
+        logger.info("Final Calculated Sum : "+sum);
         Assert.assertEquals(Float.parseFloat(numberFormatter.getCleansedPremium(premiumPage.getTotalPremium())),sum,
                 "Assertion error while validating premium");
 

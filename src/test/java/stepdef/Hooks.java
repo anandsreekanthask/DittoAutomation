@@ -32,6 +32,7 @@ public class Hooks {
 
     /**
      * Responsible for taking screenshot after evey feature step
+     *
      * @param scenario for the extent report to get context of scenario to capture screenshot
      */
     @AfterStep
@@ -51,7 +52,8 @@ public class Hooks {
      */
     @After
     public void tearDown(Scenario scenario) {
-        takeScreenshotAfterStep(scenario);
+        if (scenario.isFailed())
+            takeScreenshotAfterStep(scenario);
         System.out.println("Tear down initiated");
         DriverManager.quitDriver();
     }
