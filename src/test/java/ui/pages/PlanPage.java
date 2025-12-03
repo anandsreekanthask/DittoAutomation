@@ -3,6 +3,7 @@ package ui.pages;
 import managers.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -95,6 +96,19 @@ public class PlanPage {
     public void calculatePremium(){
         wait.until(ExpectedConditions.elementToBeClickable(CalculatePremium));
         CalculatePremium.click();
+    }
+
+    public void enterSonsAge(int index, String age){
+        String name = "Son"+index+"age";
+        WebElement sonInput = DriverManager.getDriver().findElement(By.name(name));
+        sonInput.clear();
+        sonInput.sendKeys(age);
+    }
+    public void enterDaughtersAge(int index, String age){
+        String name = "Daughter"+index+"age";
+        WebElement daughterInput = DriverManager.getDriver().findElement(By.name(name));
+        daughterInput.clear();
+        daughterInput.sendKeys(age);
     }
 
 

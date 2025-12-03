@@ -25,7 +25,6 @@ public class UIDefinition {
     private PlanPage planPage;
     private PremiumPage premiumPage;
     private NumberFormatter numberFormatter;
-
     private static final Logger logger = LogManager.getLogger(UIDefinition.class);
 
     public UIDefinition(ConfigReader configReader) {
@@ -76,18 +75,13 @@ public class UIDefinition {
         membersPage.clickNext();
     }
 
-    @And("I enter {string}, {string}, {string}, {string} and {string}")
-    public void iEnterAnd(String selfAge, String spouseAge, String sonAge, String daughterAge, String pinCode) {
+    @And("I enter {string}, {string} and {string}")
+    public void iEnterAnd(String selfAge, String spouseAge, String pinCode) {
         planPage = new PlanPage();
         logger.info("Passing self age as "+selfAge);
         planPage.enterSelfAge(selfAge);
         logger.info("Passing spouse age as "+spouseAge);
         planPage.enterSpouseAge(spouseAge);
-        logger.info("Passing son age as "+sonAge);
-        planPage.enterSonAge(sonAge);
-        logger.info("Passing daughter age as "+daughterAge);
-        planPage.enterDaughterAge(daughterAge);
-        logger.info("Passing pincode age as "+pinCode);
         planPage.enterProposerPincode(pinCode);
     }
 
@@ -166,5 +160,29 @@ public class UIDefinition {
         Assert.assertEquals(Float.parseFloat(numberFormatter.getCleansedPremium(premiumPage.getTotalPremium())),sum,
                 "Assertion error while validating premium");
 
+    }
+
+    @And("I enter children ages")
+    public void iEnterChildrenAges(DataTable table) {
+        List<Map<String,String>> rows = table.asMaps(String.class,String.class);
+
+        int sonIndex = 0;
+        int daughterIndex = 0;
+
+        for (Map<String,String> row : rows){
+            String type = row.get("type").toLowerCase();
+            String age = row.get("age");
+
+            if(type.equals("daughter")){
+                logger.info("Entering daughter age : "+age);
+                planPage.enterDaughtersAge(daughterIndex,age);
+                ++daughterIndex;
+            } else if(type.equals("son")){
+                logger.info("Entering son age : "+age);
+                planPage.enterSonsAge(sonIndex,age);
+                ++sonIndex;
+            }
+
+        }
     }
 }
